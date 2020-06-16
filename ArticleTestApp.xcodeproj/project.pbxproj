@@ -9,23 +9,31 @@
 /* Begin PBXBuildFile section */
 		DCAB0629249930F10033AB26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAB0628249930F10033AB26 /* AppDelegate.swift */; };
 		DCAB062B249930F10033AB26 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAB062A249930F10033AB26 /* SceneDelegate.swift */; };
-		DCAB062D249930F10033AB26 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAB062C249930F10033AB26 /* ViewController.swift */; };
 		DCAB0630249930F10033AB26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCAB062E249930F10033AB26 /* Main.storyboard */; };
 		DCAB0633249930F10033AB26 /* ArticleTestApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DCAB0631249930F10033AB26 /* ArticleTestApp.xcdatamodeld */; };
 		DCAB0635249930F20033AB26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCAB0634249930F20033AB26 /* Assets.xcassets */; };
 		DCAB0638249930F20033AB26 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCAB0636249930F20033AB26 /* LaunchScreen.storyboard */; };
+		DCAB0643249931880033AB26 /* ArticleListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAB063F249931880033AB26 /* ArticleListViewModel.swift */; };
+		DCAB0644249931880033AB26 /* Articles.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAB0640249931880033AB26 /* Articles.swift */; };
+		DCAB0645249931880033AB26 /* ArticleListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAB0641249931880033AB26 /* ArticleListCell.swift */; };
+		DCAB0646249931880033AB26 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAB0642249931880033AB26 /* ArticleViewController.swift */; };
+		DCAB064C2499368D0033AB26 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAB064B2499368D0033AB26 /* APIManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		DCAB0625249930F10033AB26 /* ArticleTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ArticleTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCAB0628249930F10033AB26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCAB062A249930F10033AB26 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		DCAB062C249930F10033AB26 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DCAB062F249930F10033AB26 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DCAB0632249930F10033AB26 /* ArticleTestApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ArticleTestApp.xcdatamodel; sourceTree = "<group>"; };
 		DCAB0634249930F20033AB26 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DCAB0637249930F20033AB26 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DCAB0639249930F20033AB26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DCAB063F249931880033AB26 /* ArticleListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleListViewModel.swift; sourceTree = "<group>"; };
+		DCAB0640249931880033AB26 /* Articles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Articles.swift; sourceTree = "<group>"; };
+		DCAB0641249931880033AB26 /* ArticleListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleListCell.swift; sourceTree = "<group>"; };
+		DCAB0642249931880033AB26 /* ArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
+		DCAB064B2499368D0033AB26 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,9 +66,10 @@
 		DCAB0627249930F10033AB26 /* ArticleTestApp */ = {
 			isa = PBXGroup;
 			children = (
+				DCAB064B2499368D0033AB26 /* APIManager.swift */,
+				DCAB0647249935520033AB26 /* ArticleList */,
 				DCAB0628249930F10033AB26 /* AppDelegate.swift */,
 				DCAB062A249930F10033AB26 /* SceneDelegate.swift */,
-				DCAB062C249930F10033AB26 /* ViewController.swift */,
 				DCAB062E249930F10033AB26 /* Main.storyboard */,
 				DCAB0634249930F20033AB26 /* Assets.xcassets */,
 				DCAB0636249930F20033AB26 /* LaunchScreen.storyboard */,
@@ -68,6 +77,41 @@
 				DCAB0631249930F10033AB26 /* ArticleTestApp.xcdatamodeld */,
 			);
 			path = ArticleTestApp;
+			sourceTree = "<group>";
+		};
+		DCAB0647249935520033AB26 /* ArticleList */ = {
+			isa = PBXGroup;
+			children = (
+				DCAB0642249931880033AB26 /* ArticleViewController.swift */,
+				DCAB064A2499358D0033AB26 /* TableCell */,
+				DCAB06482499357B0033AB26 /* ViewModel */,
+				DCAB0649249935850033AB26 /* Model */,
+			);
+			path = ArticleList;
+			sourceTree = "<group>";
+		};
+		DCAB06482499357B0033AB26 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DCAB063F249931880033AB26 /* ArticleListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DCAB0649249935850033AB26 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DCAB0640249931880033AB26 /* Articles.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DCAB064A2499358D0033AB26 /* TableCell */ = {
+			isa = PBXGroup;
+			children = (
+				DCAB0641249931880033AB26 /* ArticleListCell.swift */,
+			);
+			path = TableCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,10 +185,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCAB064C2499368D0033AB26 /* APIManager.swift in Sources */,
 				DCAB0633249930F10033AB26 /* ArticleTestApp.xcdatamodeld in Sources */,
-				DCAB062D249930F10033AB26 /* ViewController.swift in Sources */,
+				DCAB0646249931880033AB26 /* ArticleViewController.swift in Sources */,
 				DCAB0629249930F10033AB26 /* AppDelegate.swift in Sources */,
+				DCAB0645249931880033AB26 /* ArticleListCell.swift in Sources */,
 				DCAB062B249930F10033AB26 /* SceneDelegate.swift in Sources */,
+				DCAB0644249931880033AB26 /* Articles.swift in Sources */,
+				DCAB0643249931880033AB26 /* ArticleListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
