@@ -31,14 +31,13 @@ class APIManager: NSObject, URLSessionDelegate {
         
         let request = prepareURLRequest(url, type: type, params: params)
         fetchData(url: request, completion: completion)
-        
     }
     
 }
 
 extension APIManager {
     
-     func fetchData<T: Decodable>(url: URLRequest, completion: @escaping (Result<T, Error>) -> Void) {
+    fileprivate func fetchData<T: Decodable>(url: URLRequest, completion: @escaping (Result<T, Error>) -> Void) {
         
         let urlSession = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: OperationQueue.main)
         urlSession.dataTask(withrequest: url){ (result) in

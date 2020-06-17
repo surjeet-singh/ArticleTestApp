@@ -7,13 +7,18 @@
 //
 
 import UIKit
+import ProgressHUD
 
 class ArticleListViewModel: NSObject {
 
+    private final let _pageLimit = 10
+    private var _nextPageAvailable: Bool = true
+    private var _apiInProgress = false
+    
     var reloadHandler: (()->Void)?
-    var insertTableRowHandler: ((_ oldCount: Int, _ newCount: Int)->Void)?
+    var insertTableRowHandler: ((_ oldCount: Int, _ newCount: Int, _ nextPage: Bool)->Void)?
 
-    var articlesArray = [Article]()
+    private var articlesArray = [Article]()
     
     var numberOfArticles: Int {
         return articlesArray.count
@@ -23,22 +28,34 @@ class ArticleListViewModel: NSObject {
         return articlesArray[row]
     }
     
-    func fetchArticles() {
-        let urlStr = "https://5e99a9b1bc561b0016af3540.mockapi.io/jet2/api/v1/blogs?page=1&limit=10"
-        
+    func fetchArticles(showLoader: Bool = false) {
+        if !_nextPageAvailable || _apiInProgress{
+            return
+        }
+        let page =  articlesArray.count / _pageLimit + 1
+        let urlStr = "https://5e99a9b1bc561b0016af3540.mockapi.io/jet2/api/v1/blogs?page=\(page)&limit=\(_pageLimit)"
+        if showLoader {
+            ProgressHUD.show()
+        }
+        _apiInProgress = true
         APIManager.shared.requestWebService(urlStr, params: [:], type: .get) { (completion: Result<[Article], Error>) in
-            switch completion {
-                
-            case .success(let articles):
-                print("Success")
-                 print("New Array: \(articles.count)")
-                if !articles.isEmpty {
-                    self.articlesArray.append(contentsOf: articles)
+            self._apiInProgress = false
+            DispatchQueue.main.async {
+                if showLoader {
+                    ProgressHUD.dismiss()
                 }
-                self.insertTableRowHandler?((self.articlesArray.count - articles.count), self.articlesArray.count)
-                print("Total Count: \(self.articlesArray.count)")
-            case .failure(let error):
-                print("Failure with error \(error.localizedDescription)")
+                switch completion {
+                case .success(let articles):
+                    
+                    if !articles.isEmpty {
+                        self.articlesArray.append(contentsOf: articles)
+                    }
+                    self._nextPageAvailable = articles.count == self._pageLimit
+                    self.insertTableRowHandler?((self.articlesArray.count - articles.count), self.articlesArray.count, self._nextPageAvailable)
+                    
+                case .failure(let error):
+                    print("Failure with error \(error.localizedDescription)")
+                }
             }
         }
     }
