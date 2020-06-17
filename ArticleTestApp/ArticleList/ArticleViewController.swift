@@ -12,28 +12,47 @@ class ArticleViewController: UIViewController {
 
     @IBOutlet weak var articleTableView: UITableView!
     
-    //https://5e99a9b1bc561b0016af3540.mockapi.io/jet2/api/v1/blogs?page=1&limit=20
+    let viewModel = ArticleListViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+        self.title = "Article"
+        
+        articleTableView.tableFooterView = UIView()
         articleTableView.estimatedRowHeight = 200
         articleTableView.rowHeight = UITableView.automaticDimension
+        
+        initilizeViewModelHandlers()
+        
+        viewModel.fetchArticles()
     }
 
+    private func initilizeViewModelHandlers() {
+        viewModel.insertTableRowHandler = { [weak self] (_ oldCount: Int, _ newCount: Int) in
+            
+            let indexPaths = (oldCount ..< newCount).map { IndexPath(row: $0, section: 0) }
+           
+            self?.articleTableView.beginUpdates()
+            self?.articleTableView.insertRows(at: indexPaths, with: .automatic)
+            self?.articleTableView.endUpdates()
+        }
+    }
+    
 }
 
 extension ArticleViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return viewModel.numberOfArticles
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as? ArticleListCell else {
             return UITableViewCell()
         }
+        cell.setArticleData(viewModel.articleForRow(indexPath.row))
         return cell
     }
 }

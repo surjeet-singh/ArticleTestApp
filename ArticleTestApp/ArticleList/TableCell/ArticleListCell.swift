@@ -39,4 +39,24 @@ class ArticleListCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    func setArticleData(_ article: Article) {
+        userNameLabel.text = article.user?.first?.name
+        userDesignationLabel.text = article.user?.first?.designation
+        timeLabel.text = "Time "
+        
+        articleDescriptionLabel.text = article.content
+        articleTitleLabel.text = article.media?.first?.title
+        articleLinkLabel.text = article.media?.first?.url
+        
+        likesLabel.text = formatCounts(article.likes ?? 0) + " Likes"
+        commentLabel.text = formatCounts(article.comments ?? 0) + " Comments"
+    }
+    
+    private func formatCounts(_ count: Double) -> String {
+        if count < 1000 {
+            return "\(count)"
+        }
+        return String(format: "%.2fk", count/1000)
+    }
+    
 }

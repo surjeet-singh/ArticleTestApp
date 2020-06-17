@@ -13,8 +13,8 @@ struct Article: Codable {
     var id: String?
     var content: String?
     var createdAt: String?
-    var comments: Int?
-    var likes: Int?
+    var comments: Double?
+    var likes: Double?
     
     var media: [Media]?
     var user: [User]?
