@@ -22,9 +22,13 @@ class ArticleViewController: UIViewController {
         
         articleTableView.estimatedRowHeight = 200
         articleTableView.rowHeight = UITableView.automaticDimension
-        
+        manageTableFooter(false)
+
         initilizeViewModelHandlers()
-        
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         viewModel.fetchArticles(showLoader: true)
     }
 
@@ -63,6 +67,7 @@ extension ArticleViewController: UITableViewDataSource, UITableViewDelegate {
             return UITableViewCell()
         }
         cell.setArticleData(viewModel.articleForRow(indexPath.row), indexPath: indexPath)
+        cell.layoutIfNeeded()
         return cell
     }
     

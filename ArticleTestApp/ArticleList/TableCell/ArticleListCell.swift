@@ -23,9 +23,7 @@ class ArticleListCell: UITableViewCell {
 
     @IBOutlet weak var likesLabel: UILabel!
     @IBOutlet weak var commentLabel: UILabel!
-    
-    @IBOutlet weak var articleImageHeightConstraint: NSLayoutConstraint!
-    
+        
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -47,11 +45,17 @@ class ArticleListCell: UITableViewCell {
         let username = (article.user?.first?.name ?? "") + " " + (article.user?.first?.lastname ?? "")
         userNameLabel.text = username
         userDesignationLabel.text = article.user?.first?.designation
-        timeLabel.text = "Time "
+        timeLabel.text = article.createdAt?.formatedDate()
         
         articleDescriptionLabel.text = article.content
         articleTitleLabel.text = article.media?.first?.title
-        articleLinkLabel.text = article.media?.first?.url
+        if let url = article.media?.first?.url {
+            let attributedString = NSMutableAttributedString(string: url)
+            attributedString.addAttribute(.link, value: url, range: NSRange(location: 0, length: url.count))
+            articleLinkLabel?.attributedText = attributedString
+        }
+        articleTitleLabel.isHidden = articleTitleLabel.text?.isEmpty ?? false
+        articleLinkLabel.isHidden = articleLinkLabel.text?.isEmpty ?? false
         
         likesLabel.text = formatCounts(article.likes ?? 0) + " Likes"
         commentLabel.text = formatCounts(article.comments ?? 0) + " Comments"
@@ -61,14 +65,15 @@ class ArticleListCell: UITableViewCell {
         } else {
             userImageView.setTextImage(username)
         }
-        
+
         if let mediaURL = article.media?.first?.image, !mediaURL.isEmpty {
             articleImageView.isHidden = false
+            articleImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
             articleImageView.sd_setImage(with: URL(string: mediaURL)) { (image, error, cacheType, url) in
-                print(image?.size)
-                self.layoutIfNeeded()
+                self.tableView?.reloadRows(at: [indexPath], with: .fade)
             }
         } else {
+            articleImageView.image = nil
             articleImageView.isHidden = true
         }
     }

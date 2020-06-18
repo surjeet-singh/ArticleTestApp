@@ -29,7 +29,7 @@ class ArticleListViewModel: NSObject {
     }
     
     func fetchArticles(showLoader: Bool = false) {
-        if !_nextPageAvailable || _apiInProgress{
+        if !_nextPageAvailable || _apiInProgress {
             return
         }
         let page =  articlesArray.count / _pageLimit + 1
